@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ profile_owner }}님의 프로필 페이지.</h1>
+    <hr>
+    <p>팔로잉: {{ profile_owner.followings.all|length }}</p>
+    <p>팔로워: {{ profile_owner.followers.all|length }}</p>
+    {% if request.user != profile_owner %}
+        {% if request.user in profile_owner.followers.all %}
+        <a href="{% url 'accounts:follow' profile_owner %}">UNFOLLOW</a>
+        {% else %}
+        <a href="{% url 'accounts:follow' profile_owner %}">FOLLOW</a>
+        {% endif %}
+    {% endif %}
+{% endblock %}

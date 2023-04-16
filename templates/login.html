@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SIGN IN</title>
+</head>
+
+<body>
+    <!-- Modal -->
+    <div class="modal fade" id="SIGNIN" tabindex="-1" role="dialog" aria-labelledby="SIGNINTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="SIGNINTitle">SIGN IN</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'accounts:signin' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-row mb-3 mt-2">
+                            <div class="col-12">
+                                {% if error %}
+                                <div class="d-flex flex-row">
+                                    <label for="username" class="mr-3">Username</label>
+                                    <p class="text-danger p-0 m-0">{{ error }}</p>
+                                </div>
+                                {% else %}
+                                <label for="username">Username</label>
+                                {% endif %}
+                                <div><input type='text' id='username' name="username" class="form-control"></div>
+                            </div>
+                        </div>
+                        <div class="form-row mb-6">
+                            <div class="col-12">
+                                <label for="password">Password</label>
+                                <div><input type='password' id='password' name="password" class="form-control"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-5">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Sign In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
