@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>로그인 페이지</h1>
+<form action="{% url 'account:login' %}" method="POST">
+  {% csrf_token %}
+  {% include "form_errors.html" %}
+  {{form.as_p}}
+  <button type="submit">로그인</button>
+</form>
+
+{% endblock %}
+
+
+<!-- {{form.as_p}} form을 출력시키기위해 입력 -->

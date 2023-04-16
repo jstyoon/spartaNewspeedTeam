@@ -1,0 +1,261 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <title>{% block title %}홈{% endblock %} | HoIT</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+  <style>
+    /* 전역적 css */
+
+    @font-face {
+      font-family: 'NEXON Lv1 Gothic OTF';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+      font-weight: 300;
+      /* font-style: normal; */
+    }
+
+    @font-face {
+      font-family: 'NEXON Lv1 Gothic OTF';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+      font-weight: 400;
+      /* font-style: normal; */
+    }
+
+    @font-face {
+      font-family: 'NEXON Lv1 Gothic OTF';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+      font-weight: 500;
+      /* font-style: normal; */
+    }
+
+    * {
+      font-family: 'NEXON Lv1 Gothic OTF';
+    }
+
+    .title-center {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .wrap {
+      width: 400px;
+      margin: 0 auto;
+    }
+
+    .form-area {
+      margin-top: 25px;
+    }
+
+    .timeline-container {
+      margin-top: 25px;
+    }
+
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .container-feed {
+      width: 1200px;
+      margin: 0 auto;
+    }
+
+    nav {
+      margin-bottom: 30px;
+    }
+
+    .navbar-brand {
+      font-size: 25px;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-size: 0;
+      line-height: 50px;
+    }
+
+    h1 img {
+      width: 100px;
+      height: 41px;
+    }
+
+    h1 a {
+      box-sizing: border-box;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    img {
+      object-fit: cover;
+    }
+
+    /* feed_detail */
+
+    .flex {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .detail {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1200px;
+      border: 1px solid #dddddd;
+      border-radius: 5px;
+      box-shadow: 1 1 1 #dddddd;
+    }
+
+    .left {
+      flex: 1;
+      height: 710px;
+      padding: 30px;
+    }
+
+    .left>img {
+      width: 540px;
+      height: 540px;
+      margin-bottom: 30px;
+      border: 1px solid;
+    }
+
+    .url {
+      width: 540px;
+      height: 20px;
+    }
+
+    .right {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .right .right-textarea {
+      height: 500px;
+      margin: 30px 0;
+      resize: none
+    }
+
+    .right .right_btn {
+      float: right;
+    }
+
+    .form-inline {
+      line-height: 50px;
+    }
+
+    /* feed의 grid함수 */
+    .grid {
+      /* width 1200 에 gep 30 img크기는 380 */
+      display: grid;
+      grid-template-rows: repeat(4, 1fr);
+      grid-template-columns: repeat(4, 1fr);
+      /* grid-template-columns: 300px 300px 500px; */
+      column-gap: 30px;
+      row-gap: 30px;
+    }
+
+    .btn_detail {
+      text-decoration: none;
+      color: white;
+    }
+
+    .grid img {
+      width: 277.5px;
+      height: 277.5px;
+      object-fit: cover;
+    }
+
+    .grid p {
+      font-size: 19px;
+      color: #333;
+      /* white-space: nowrap; */
+      margin: 10px 0;
+    }
+
+    @media (min-width: 1400px) {
+      .container-feed {
+        max-width: 1200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <form class="container-feed flex">
+      <div>
+        <ul class="navbar-nav mr-auto form-inline">
+          <li class="nav-item active">
+            <!-- 유저폼과 연결 및 href에 마이페이지 링크 삽입 필요 -->
+            {% if not user.is_authenticated %}
+            <a class="nav-link" href="/">방문을 환영합니다!</a>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <a class="nav-link" href="/account/{{user.username}}/">
+              <span class="sr-only">{{user.username}}</span>님 마이페이지
+            </a>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+      <h1>
+        <a href="/">
+          <img src="{%static 'img/hoit_logo.png' %}" alt="">
+        </a>
+      </h1>
+      {% if not user.is_authenticated %}
+      <div class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/account/login">
+              로그인 <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/account/signup">
+              회원가입 <span class="sr-only"></span></a>
+          </li>
+        </ul>
+      </div>
+      {% endif %}
+
+      {% if user.is_authenticated %}
+      <div class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/feed/upload/">
+              글쓰기 <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item active">
+            <!-- href url 수정 필요 -->
+            <a class="nav-link" href="/account/logout/">
+              로그아웃 <span class="sr-only"></span></a>
+          </li>
+        </ul>
+      </div>
+      {% endif %}
+    </form>
+    </div>
+  </nav>
+  {% block content %}
+
+{% endblock %}
+
+</body>
+
+</html>

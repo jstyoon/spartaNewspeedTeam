@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+상세보기
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="detail">
+    <form class="input-group flex" action="/feed/detail/{{id}}" method="POST">
+      {% csrf_token %}
+
+      <!--좌측 이미지면-->
+      <div class="left">
+        <!--이미지src **{{수정}}-->
+        <img src="{{post.post_image}}" class="rounded float-start image" alt="image" id="image" name="image" />
+
+        <!-- Url 입력 영역+button input의 name이 imageUrl-->
+        <div class="url">
+          <p>URL</p>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="이미지를 첨부할 url을 입력하세요." aria-label="Recipient's username"
+              aria-describedby="button-addon2" value="{{post.post_image}}" id="imageUrl" name="imageUrl">
+          </div>
+        </div>
+      </div>
+
+      <!--우측 컨텐츠면-->
+      <div class="right">
+        <div class="flex">
+          <!--제목 input의 name이 subject-->
+          <input class="form-control form-control-lg subject" type="text" placeholder="제목을 입력하세요"
+            aria-label=".form-control-lg example" id="subject" name="subject" value="{{post.post_title}}" />
+          <!--닉네임표시-->
+          <a class="nav-link active" aria-current="page" href="#">{{nickname}}</a>
+        </div>
+        <!--내용 textarea의 name이 contents-->
+        <!-- <textarea class="contents form-control" name="contents" placeholder="내용 입력"></textarea>
+              <button type="submit" value="작성" id="button-submit">작성</button> -->
+        <div class="mb-3 right-form">
+          <textarea class="form-control white-space right-textarea" id="exampleFormControlTextarea1"
+            placeholder="내용을 입력하세요." rows="3" name="contents">{{post.post_content}}</textarea>
+        </div>
+        <div class="right_btn">
+          <button type="submit" class="btn btn-dark" name="button" href="/feed/detail/{{id}}">수정완료</button>
+          <!-- <button class="btn btn-secondary"><a class="btn_detail" href="/feed">닫기</a></button> -->
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
